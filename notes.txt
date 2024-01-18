@@ -1,0 +1,9 @@
+
+POLYGON API
+
+
+API KEY: 
+iYpKUMU5UrLYZZIWf5POL1faypVVku2Q
+
+FINANCIALS LINK:
+https://api.polygon.io/vX/reference/financials?apiKey=iYpKUMU5UrLYZZIWf5POL1faypVVku2Q

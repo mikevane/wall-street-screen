@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="keywords" content="Wall Street, Stock Screener" />
+    <meta name="description" content="Practicing my JS, HTML, and CSS skills" />
+    <meta name="author" content="Michal Vaněk" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script type="module" src="scripts/model.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Gochi+Hand&display=swap"
+      rel="stylesheet"
+    />
+    <title>Template</title>
+  </head>
+
+  <body>
+    <div class="header">
+      <h1>Wall Street Screen</h1>
+      <p>My first JavaScript project</p>
+    </div>
+
+    <div class="topnav">
+      <a href="index.html" class="home">Home</a>
+      <!-- Navigation links (hidden on large screen) -->
+      <div id="myLinks">
+        <a href="#news">News</a>
+        <a href="#contact">Contact</a>
+        <a href="#Specials">Specials</a>
+        <a href="#archive">Archive</a>
+        <a href="#about">About</a>
+      </div>
+      <!-- "Hamburger menu" to toggle the navigation links -->
+      <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+        <i class="fa fa-bars"></i>
+      </a>
+    </div>
+
+    <!-- flex container for main content and sidebar -->
+    <div class="flex">
+      <div class="main">
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea
+          <a href="#" title="commodo consequat">commodo consequat</a>. Duis aute
+          irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+          fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+          sunt in culpa qui officia deserunt mollit anim id est laborum.
+        </p>
+
+        <div id="screener"></div>
+      </div>
+
+      <div class="sidebar">
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat. Duis aute irure dolor in
+          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+          culpa qui officia deserunt mollit anim id est laborum.
+        </p>
+        <ul>
+          <li>Item 1</li>
+          <li>Item 2</li>
+          <li>Item 3</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- flex container for footer content -->
+    <div class="footer">
+      <div class="foot-left">2024 &copy; Michal Vaněk</div>
+      <div class="foot-right">Lorem Ipsum Dolor Sit Amet.</div>
+    </div>
+
+    <!-- Toggle between showing and hiding the navigation menu links when the user clicks on the hamburger menu -->
+    <script>
+      function myFunction() {
+        var x = document.getElementById("myLinks");
+        if (x.style.display === "block") {
+          x.style.display = "none";
+        } else {
+          x.style.display = "block";
+        }
+      }
+    </script>
+  </body>
+</html>
