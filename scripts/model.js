@@ -14,14 +14,15 @@ export let stock = {
 };
 
 const createStockReportObject = function (data) {
+  console.log(data);
   const {
     company_name,
     tickers,
     financials,
-    start_date,
-    end_date,
-    fiscal_period,
-    fiscal_year,
+    start_date: start,
+    end_date: end,
+    fiscal_period: quarter,
+    fiscal_year: year,
   } = data;
 
   stock.company_name = company_name;
@@ -30,14 +31,23 @@ const createStockReportObject = function (data) {
     ? (stock.tickers = tickers.toString())
     : (stock.tickers = tickers[0]);
   stock.financials = financials;
-  stock.start = new Date(start_date);
-  stock.end = new Date(end_date);
-  stock.quarter = fiscal_period;
-  stock.year = fiscal_year;
-  console.log(stock.company_name);
+  stock.start = new Date(start);
+  stock.end = new Date(end);
+  stock.quarter = quarter;
+  stock.year = year;
 
-  return stock;
+  return {
+    company_name: stock.company_name,
+    tickers: stock.tickers,
+    financials: stock.financials,
+    start: stock.start,
+    end: stock.end,
+    quarter: stock.quarter,
+    year: stock.year,
+  };
 };
+
+console.log(stock.company_name);
 
 const loadSTOCK = async function () {
   try {
@@ -46,7 +56,7 @@ const loadSTOCK = async function () {
     console.log(stock.company_name);
     console.log(stock.tickers);
     console.log(stock.financials);
-    console.log(JSON.stringify(stock));
+    // console.log(JSON.stringify(stock));
     console.log(
       `${stock.start} / ${stock.end} // ${stock.quarter} / ${stock.year}`
     );
