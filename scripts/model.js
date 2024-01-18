@@ -3,19 +3,13 @@ import { getJSON } from "./helpers.js";
 
 const screener = document.getElementById("screener");
 
-export let stock = {
-  company_name: "",
-  tickers: [],
-  financials: {},
-  start: "",
-  end: "",
-  quarter: "",
-  year: "",
-};
+export let stock = {};
+
+let pokus = 4;
 
 const createStockReportObject = function (data) {
   console.log(data);
-  const {
+  let {
     company_name,
     tickers,
     financials,
@@ -25,53 +19,50 @@ const createStockReportObject = function (data) {
     fiscal_year: year,
   } = data;
 
-  stock.company_name = company_name;
   // Ternary operator: if there's more tickers in the array, use 1st one
   tickers.length === 1
-    ? (stock.tickers = tickers.toString())
-    : (stock.tickers = tickers[0]);
-  stock.financials = financials;
-  stock.start = new Date(start);
-  stock.end = new Date(end);
-  stock.quarter = quarter;
-  stock.year = year;
+    ? (tickers = tickers.toString())
+    : (tickers = tickers[0]);
 
   return {
-    company_name: stock.company_name,
-    tickers: stock.tickers,
-    financials: stock.financials,
-    start: stock.start,
-    end: stock.end,
-    quarter: stock.quarter,
-    year: stock.year,
+    company_name: company_name,
+    tickers: tickers,
+    financials: financials,
+    start: start,
+    end: end,
+    quarter: quarter,
+    year: year,
   };
 };
 
-console.log(stock.company_name);
-
-const loadSTOCK = async function () {
+const loadStock = async function () {
   try {
-    const input = await getJSON(`${API_URL}${API_KEY}&ticker=PLTR`);
-    stock = createStockReportObject(input.results[1]);
-    console.log(stock.company_name);
-    console.log(stock.tickers);
-    console.log(stock.financials);
-    // console.log(JSON.stringify(stock));
-    console.log(
-      `${stock.start} / ${stock.end} // ${stock.quarter} / ${stock.year}`
-    );
+    const data = await getJSON(`${API_URL}${API_KEY}&ticker=PLTR`);
+    stock = createStockReportObject(data.results[1]);
+    console.log(stock);
 
-    screener.insertAdjacentHTML("afterbegin", basic_info);
-
-    // console.log(stock.financials.balance_sheet.assets.value);
+    fillScreen();
   } catch (err) {
     console.error(`WARNING: ${err}`);
     throw err;
   }
 };
-loadSTOCK();
+loadStock();
 
-console.log(stock);
-console.log(stock.company_name);
+const fillScreen = function () {
+  stock.start = new Date(stock.start);
+  stock.end = new Date(stock.end);
+  stock.start = new Intl.DateTimeFormat("cs-CZ").format(stock.start);
+  stock.end = new Intl.DateTimeFormat("cs-CZ").format(stock.end);
 
-const basic_info = `<h3>${stock.company_name}</h3><p>Zpráva za období" ${stock.start}-${stock.end}</p><p>Lorem ipsim dolor sit amet.</p>`;
+  const basic_info = `
+      <h3>${stock.company_name} (${stock.tickers})</h3>
+      <p>Report pro <b>${stock.quarter} ${stock.year}</b>
+      <br />(Období od ${stock.start} do ${stock.end})</p>
+      <h4>Rozvaha</h4>
+      <p>Aktiva: ${stock.financials.balance_sheet.assets.unit} ${stock.financials.balance_sheet.assets.value}
+      <br />Pasiva: ${stock.financials.balance_sheet.liabilities.unit} ${stock.financials.balance_sheet.liabilities.value}</p>
+      `;
+
+  screener.insertAdjacentHTML("afterbegin", basic_info);
+};

@@ -188,6 +188,9 @@ a:hover {
 #screener {
     background:#fff;
     height: 400px;
+    padding: 10px;
+    font-family: 'Arial', sans-serif;
+    line-height: 1.5;
 }
 
 
