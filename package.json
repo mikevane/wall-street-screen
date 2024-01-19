@@ -1,0 +1,19 @@
+{
+  "name": "wall-street-screen",
+  "version": "1.0.0",
+  "description": "Displays stock financial data from Polygon API",
+  "default": "index.html",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html --dist-dir ./dist"
+  },
+  "author": "Michal Vaněk",
+  "license": "ISC",
+  "devDependencies": {
+    "parcel": "^2.11.0"
+  },
+  "dependencies": {
+    "core-js": "^3.35.0",
+    "regenerator-runtime": "^0.14.1"
+  }
+}

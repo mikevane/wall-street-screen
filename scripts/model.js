@@ -1,5 +1,7 @@
 import { API_URL, API_KEY } from "./config.js";
 import { getJSON } from "./helpers.js";
+import "core-js/stable";
+import { async } from "regenerator-runtime";
 
 const screener = document.getElementById("screener");
 

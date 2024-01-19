@@ -1,4 +1,6 @@
 import { TIMEOUT } from "./config.js";
+import "core-js/stable";
+import { async } from "regenerator-runtime";
 
 export const getJSON = async function (url) {
   try {
