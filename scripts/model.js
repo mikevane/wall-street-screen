@@ -4,6 +4,8 @@ import "core-js/stable";
 import { async } from "regenerator-runtime";
 
 const screener = document.getElementById("screener");
+const searchField = document.querySelector(".search__field");
+const searchButton = document.querySelector(".search__btn");
 
 export let stock = {};
 
@@ -37,9 +39,9 @@ const createStockReportObject = function (data) {
   };
 };
 
-const loadStock = async function () {
+const loadStock = async function (ticker) {
   try {
-    const data = await getJSON(`${API_URL}${API_KEY}&ticker=PLTR`);
+    const data = await getJSON(`${API_URL}${API_KEY}&ticker=${ticker}`);
     stock = createStockReportObject(data.results[1]);
     console.log(stock);
 
@@ -51,7 +53,17 @@ const loadStock = async function () {
     // throw err;
   }
 };
-loadStock();
+
+// SEARCH FUNCIONALITY
+searchButton.addEventListener("click", function (e) {
+  e.preventDefault();
+  // collects the ticker from the field
+  ticker = searchField.value;
+  // loads the stock using loadStock function
+  loadStock(ticker);
+  // clears the search field for the next usage
+  searchField.value = "";
+});
 
 const fillScreen = function () {
   stock.start = new Date(stock.start);
@@ -59,14 +71,11 @@ const fillScreen = function () {
   stock.start = new Intl.DateTimeFormat("cs-CZ").format(stock.start);
   stock.end = new Intl.DateTimeFormat("cs-CZ").format(stock.end);
 
-  const basic_info = `
-      <h3>${stock.company_name} (${stock.tickers})</h3>
+  const basic_info = `      
+  <h3>${stock.company_name} (${stock.tickers})</h3>
       <p>Report pro <b>${stock.quarter} ${stock.year}</b>
       <br />(Období od ${stock.start} do ${stock.end})</p>
       <h4>Rozvaha</h4>
       <p>Aktiva: ${stock.financials.balance_sheet.assets.unit} ${stock.financials.balance_sheet.assets.value}
-      <br />Pasiva: ${stock.financials.balance_sheet.liabilities.unit} ${stock.financials.balance_sheet.liabilities.value}</p>
-      `;
-
-  screener.insertAdjacentHTML("afterbegin", basic_info);
+      <br />Pasiva: ${stock.financials.balance_sheet.liabilities.unit} ${stock.financials.balance_sheet.liabilities.value}</p>`;
 };
