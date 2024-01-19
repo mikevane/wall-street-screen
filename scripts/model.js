@@ -42,12 +42,12 @@ const createStockReportObject = function (data) {
 // Load stock that is requested through search field
 const loadStock = async function (ticker) {
   try {
-    // Call API with a requested ticker
+    // Calls API with a requested ticker
     const data = await getJSON(`${API_URL}${API_KEY}&ticker=${ticker}`);
-    // Convert data using another function
+    // Converts data using another function
     stock = createStockReportObject(data.results[1]);
     console.log(stock);
-    // Populate screener
+    // Populates screener
     fillScreen();
   } catch (err) {
     console.error(
@@ -56,17 +56,6 @@ const loadStock = async function (ticker) {
     // throw err;
   }
 };
-
-// SEARCH FUNCIONALITY
-searchButton.addEventListener("click", function (e) {
-  e.preventDefault();
-  // Collects the ticker from the field
-  const ticker = searchField.value;
-  // Loads the stock using loadStock function
-  loadStock(ticker);
-  // Clears the search field for the next usage
-  searchField.value = "";
-});
 
 // Renders the data
 const fillScreen = function () {
@@ -93,15 +82,37 @@ const fillScreen = function () {
   screener.insertAdjacentHTML("afterbegin", basic_info);
 };
 
+// SEARCH FUNCIONALITY UPON CLICKING BUTTON
+searchButton.addEventListener("click", function (e) {
+  e.preventDefault();
+  // Collects the ticker from the field
+  const ticker = searchField.value;
+  // Converst lower-cased tickers so the search works
+  const tickerUppercased = ticker.toUpperCase();
+  // Guard clause - execute only if ticker was passed
+  if (!tickerUppercased) return;
+  // Loads the stock using loadStock function
+  loadStock(tickerUppercased);
+  // Clears the search field for the next search
+  searchField.value = "";
+});
+
+// SEARCH FUNCTIONALITY UPON HITTING ENTER KEY
+searchField.addEventListener("keypress", function (e) {
+  // If "Enter" key is pressed and released
+  if (e.keyCode === 13) {
+    // Simulates a "Search" button click
+    searchButton.click();
+  }
+});
+
 // -- TODO --
 
 // CODING
-// 1) Make sure lower-case tickers are converted before executing
-// 2) Fix error handling
+
+// 1) Fix error handling, and display error in the screener properly formatted
+// 2) Format dollar amounts into format: 1 000 000 000
 // 3) loading older reports as well
 
 // CONTENT
 // 1) Load more financial data (almost all of them)
-
-// WEBDESING
-// 1) Pretty much everything
