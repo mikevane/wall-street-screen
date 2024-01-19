@@ -19,10 +19,10 @@ const createStockReportObject = function (data) {
     fiscal_year: year,
   } = data;
 
-  // Ternary operator: if there's more tickers in the array, use 1st one
+  // Ternary operator
   tickers.length === 1
-    ? (tickers = tickers.toString())
-    : (tickers = tickers[0]);
+    ? (tickers = tickers.toString()) // if there's 1 ticker in the array, simply convert array to a string
+    : (tickers = tickers[0]); // if there's more tickers in the array, use 1st one
 
   return {
     company_name: company_name,
@@ -43,8 +43,10 @@ const loadStock = async function () {
 
     fillScreen();
   } catch (err) {
-    console.error(`WARNING: ${err}`);
-    throw err;
+    console.error(
+      `${err} - Příliš mnoho pokusů o připojení. Prosím, zkuste znovu za 1 minutu.`
+    );
+    // throw err;
   }
 };
 loadStock();

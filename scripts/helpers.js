@@ -8,7 +8,9 @@ export const getJSON = async function (url) {
     if (!res.ok) throw new Error(`${data.message} (${res.status})`);
     return data;
   } catch (err) {
-    throw err;
+    console.error(
+      err`Příliš mnoho pokusů o připojení. Prosím, zkuste znovu za + minutu.`
+    );
   }
 };
 
