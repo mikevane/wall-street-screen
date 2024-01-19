@@ -76,6 +76,12 @@ const fillScreen = function () {
   const curLiabilities = formatAmount(
     stock.financials.balance_sheet.current_liabilities.value
   );
+  const nonCurAssets = formatAmount(
+    stock.financials.balance_sheet.noncurrent_assets.value
+  );
+  const nonCurLiabilities = formatAmount(
+    stock.financials.balance_sheet.noncurrent_liabilities.value
+  );
   const equity = formatAmount(stock.financials.balance_sheet.equity.value);
   const equityAndLiab = formatAmount(
     stock.financials.balance_sheet.liabilities_and_equity.value
@@ -85,12 +91,42 @@ const fillScreen = function () {
 
   // Creates the HTML
   const basic_info = `      
-    <h3>${stock.company_name} (${stock.tickers})</h3>
-    <p>Report pro <b>${stock.quarter} ${stock.year}</b>
-    <br />(Období od ${stock.start} do ${stock.end})</p>
-    <h4>Rozvaha</h4>
-    <p>Aktiva: ${stock.financials.balance_sheet.assets.unit} ${assets}
-    <br />Pasiva: ${stock.financials.balance_sheet.liabilities.unit} ${liabilities}</p>
+        <div class="wrapper">
+        <div>
+          <h3>${stock.company_name} (${stock.tickers})</h3>
+          Report pro <b>${stock.quarter} ${stock.year}</b><br />
+          (Období od ${stock.start} do ${stock.end})
+        </div>
+        <table>
+          <th colspan="4"><h4>Rozvaha<h4></h4></th>
+          <tr>
+            <td>Aktiva celkem:</td>
+            <td>${assets}</td>
+            <td>Závazky celkem:</td>
+            <td>${liabilities}</td>
+          </tr>
+          <tr>
+              <td>Oběžná aktiva</td>
+              <td>${curAssets}</td>
+              <td>Krátkodobé závazky:</td>
+              <td>${curLiabilities}</td>
+            </tr>
+            <tr>
+              <td>Dlouhodobý majetek:</td>
+              <td>${nonCurAssets}</td>
+              <td>Dlouhodobé závazky:</td>
+              <td>${nonCurLiabilities}</td>
+            </tr>
+            <tr>
+              <td colspan="2">Celkový kapitál:</td>
+              <td colspan="2">${equity}</td>
+            </tr>
+            <tr>
+              <td colspan="2">Celkový kapitál + závazky</td>
+              <td colspan="2">${equityAndLiab}</td>
+            </tr>
+        </table>
+      </div>
     `;
 
   // Inserts the HTML into screener div
