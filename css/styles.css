@@ -139,8 +139,14 @@ body {
 
 h1 {
   font-family: "Gochi Hand", cursive;
-  font-size: 4vw;
-  /* text-transform: uppercase; */
+  font-size: 54px;
+  background-color: #fff;
+  background-image: linear-gradient(to right bottom, #eee, #a0764a);
+  background-size: 100%;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color: transparent;
 }
 h2 {
   font-size: 220%;
@@ -160,6 +166,10 @@ a {
 
 a:hover {
   text-decoration: underline;
+}
+
+form {
+  margin-bottom: 10px;
 }
 
 .header {

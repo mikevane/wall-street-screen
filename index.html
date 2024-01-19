@@ -6,7 +6,7 @@
     <meta name="description" content="Practicing my JS, HTML, and CSS skills" />
     <meta name="author" content="Michal Vaněk" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <script type="module" src="scripts/model.js"></script>
+    <script type="module" src="/scripts/model.js"></script>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
@@ -62,6 +62,17 @@
           Originály finančních zpráv jsou ke stažení v sekci Vztahy s investory
           na webových stránkách dané firmy.
         </p>
+
+        <form class="search">
+          <input
+            type="text"
+            class="search__field"
+            placeholder="Search with a stock ticker"
+          />
+          <button class="btn search--btn">
+            <span>Search</span>
+          </button>
+        </form>
 
         <div id="screener"></div>
       </div>
