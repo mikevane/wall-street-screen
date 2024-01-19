@@ -23,3 +23,9 @@ const timeout = function (s) {
     }, s * 1000);
   });
 };
+
+// Formats string mounts from '12345567' to '1 234 567'
+export const formatAmount = function (num) {
+  const parted = num.toString().replace(/(\d)(?=(\d{3})+$)/g, "$1 ");
+  return parted;
+};

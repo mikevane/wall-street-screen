@@ -172,6 +172,32 @@ form {
   margin-bottom: 10px;
 }
 
+table {
+  max-width: 100%;
+  min-width: 33%;
+  text-align: left;
+  background-color: #fff;
+  float: left;
+}
+
+table th {
+  text-align: center;
+  border: 1px solid #444;
+}
+
+table tr:hover {
+  background-color: #b3c7dc;
+}
+
+table td {
+  border: 1px solid #444;
+}
+
+table h4 {
+  margin: 0;
+  padding: 0;
+}
+
 .header {
   padding: 30px;
   text-align: center;
@@ -219,6 +245,13 @@ form {
 
 .sidebar a {
   font-weight: bold;
+}
+
+.wrapper {
+  background-color: #fff;
+  text-align: center;
+  max-width: 1024px;
+  min-width: 450px;
 }
 
 .footer {

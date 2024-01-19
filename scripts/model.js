@@ -1,5 +1,5 @@
 import { API_URL, API_KEY } from "./config.js";
-import { getJSON } from "./helpers.js";
+import { getJSON, formatAmount } from "./helpers.js";
 import "core-js/stable";
 import { async } from "regenerator-runtime";
 
@@ -65,6 +65,21 @@ const fillScreen = function () {
   stock.start = new Intl.DateTimeFormat("cs-CZ").format(stock.start);
   stock.end = new Intl.DateTimeFormat("cs-CZ").format(stock.end);
 
+  // Formats amount strings from 1234567 to 1 234 567
+  const assets = formatAmount(stock.financials.balance_sheet.assets.value);
+  const liabilities = formatAmount(
+    stock.financials.balance_sheet.liabilities.value
+  );
+  const curAssets = formatAmount(
+    stock.financials.balance_sheet.current_assets.value
+  );
+  const curLiabilities = formatAmount(
+    stock.financials.balance_sheet.current_liabilities.value
+  );
+  const equity = formatAmount(stock.financials.balance_sheet.equity.value);
+  const equityAndLiab = formatAmount(
+    stock.financials.balance_sheet.liabilities_and_equity.value
+  );
   // Empties old data if there's any
   screener.innerHTML = "";
 
@@ -74,8 +89,8 @@ const fillScreen = function () {
     <p>Report pro <b>${stock.quarter} ${stock.year}</b>
     <br />(Období od ${stock.start} do ${stock.end})</p>
     <h4>Rozvaha</h4>
-    <p>Aktiva: ${stock.financials.balance_sheet.assets.unit} ${stock.financials.balance_sheet.assets.value}
-    <br />Pasiva: ${stock.financials.balance_sheet.liabilities.unit} ${stock.financials.balance_sheet.liabilities.value}</p>
+    <p>Aktiva: ${stock.financials.balance_sheet.assets.unit} ${assets}
+    <br />Pasiva: ${stock.financials.balance_sheet.liabilities.unit} ${liabilities}</p>
     `;
 
   // Inserts the HTML into screener div
@@ -107,12 +122,8 @@ searchField.addEventListener("keypress", function (e) {
 });
 
 // -- TODO --
-
 // CODING
-
 // 1) Fix error handling, and display error in the screener properly formatted
-// 2) Format dollar amounts into format: 1 000 000 000
-// 3) loading older reports as well
-
+// 2) loading older reports as well
 // CONTENT
 // 1) Load more financial data (almost all of them)
