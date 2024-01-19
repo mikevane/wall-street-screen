@@ -61,7 +61,7 @@ const loadStock = async function (ticker) {
 searchButton.addEventListener("click", function (e) {
   e.preventDefault();
   // Collects the ticker from the field
-  ticker = searchField.value;
+  const ticker = searchField.value;
   // Loads the stock using loadStock function
   loadStock(ticker);
   // Clears the search field for the next usage
