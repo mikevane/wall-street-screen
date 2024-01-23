@@ -51,7 +51,6 @@ const createStockCompanyObject = function (data) {
     branding: logo,
     total_employees: employees,
     market_cap,
-    description,
   } = data;
 
   return {
@@ -61,7 +60,6 @@ const createStockCompanyObject = function (data) {
     logo: logo,
     employees: employees,
     market_cap: market_cap,
-    description: description,
   };
 };
 
@@ -125,15 +123,15 @@ const fillScreen = function () {
   const employed = formatAmount(company.employees);
 
   // Formats other strings as necessary
-  const about = company.description.slice(0, 300);
-  const street = company.address.address1.toLowerCase();
+  let street = company.address.address1.toLowerCase().split(" ");
+  for (let i = 0; i < street.length; i++) {
+    street[i] = street[i][0].toUpperCase() + street[i].substring(1);
+  }
+  street = street.join().replaceAll(",", " ");
+
   const city =
     company.address.city.slice(0, 1) +
     company.address.city.substring(1).toLowerCase();
-
-  // Saves company logo into local storage
-  localStorage.setItem("logo_img", company.logo.icon_url);
-  const logo = localStorage.getItem("logo_img");
 
   // Empties old data if there's any
   screener.innerHTML = "";
@@ -142,15 +140,15 @@ const fillScreen = function () {
   const basic_info = `      
         <div class="wrapper">
         <div>
-          <h3>${stock.company_name} (${company.ticker})</h3>
-          <img src="${logo}" alt="${company.ticker} logo" />
-          <p><span class="item">Adresa:</span> ${street}, ${city}, ${company.address.postal_code}, ${company.address.state}
+          <h3>${stock.company_name}</h3>
+          <img src="${company.logo.logo_url}?apiKey=iYpKUMU5UrLYZZIWf5POL1faypVVku2Q" alt="${company.ticker} logo" title="${company.ticker} logo" class="branding"/>
+          <p><span class="item">Ticker:</span> ${company.ticker}
+          <br /><span class="item">Adresa:</span> ${street}, ${city}, ${company.address.postal_code}, ${company.address.state}
           <br /><span class="item">Počet zaměstnanců:</span> ${employed}
-          <br /><span class="item">Tržní kapitalizace:</span> $ ${capitalization}
+          <br /><span class="item">Tržní kapitalizace:</span> ${capitalization} USD
           <p />
-          <p><span class="item">Popis:</span> ${about}...</p>
           <span class="item">Výňatek z finanční zprávy za ${stock.quarter} ${stock.year}:</span><br />
-          (Období od ${stock.start} do ${stock.end})
+          (${stock.start} - ${stock.end})
         </div>
         <table>
           <th colspan="4"><h4>Rozvaha<h4></h4></th>
@@ -214,11 +212,15 @@ searchField.addEventListener("keypress", function (e) {
 
 // -- TODO --
 // CODING
-// 1) Fix lower/uppercase in the street string
-// 2) Figure out saving and displaying of images from API
-// 3) Fix error handling, and display error in the screener properly formatted
-// 4) loading older reports as well
-// 5) Refactoring
+
+// 7) Fix error handling, and display error in the screener properly formatted
+// 6) loading older reports as well
+// 5) Replacing hamburger menu
+// 4) Refactoring
 
 // CONTENT
-// 1) Load more financial data (almost all of them)
+// 3) Load more financial data (almost all of them)
+
+// WEBDESIGN
+// 2) Gorgeous web-design
+// 1) Responsive design using DOM manipulation
