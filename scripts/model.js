@@ -1,4 +1,4 @@
-import { API_URL, API_KEY } from "./config.js";
+import { API_URL_2, API_URL_3, API_KEY } from "./config.js";
 import { getJSON, formatAmount } from "./helpers.js";
 import "core-js/stable";
 import { async } from "regenerator-runtime";
@@ -8,14 +8,15 @@ const searchField = document.querySelector(".search__field");
 const searchButton = document.querySelector(".search__btn");
 
 let stock = {};
+let company = {};
 
-// Converting data received from API into more usable format
+// Converting financial data received from API into more usable format
 const createStockReportObject = function (data) {
   console.log(data);
   // desctructuring "data" object received in loadStock function
   let {
     company_name,
-    tickers,
+    // tickers,
     financials,
     start_date: start,
     end_date: end,
@@ -23,14 +24,14 @@ const createStockReportObject = function (data) {
     fiscal_year: year,
   } = data;
 
-  // Ternary operator
-  tickers.length === 1
-    ? (tickers = tickers.toString()) // if there's 1 ticker in the array, simply convert array to a string
-    : (tickers = tickers[0]); // if there's more tickers in the array, use 1st one
+  // // Ternary operator
+  // tickers.length === 1
+  //   ? (tickers = tickers.toString()) // if there's 1 ticker in the array, simply convert array to a string
+  //   : (tickers = tickers[0]); // if there's more tickers in the array, use 1st one
 
   return {
     company_name: company_name,
-    tickers: tickers,
+    // tickers: tickers,
     financials: financials,
     start: start,
     end: end,
@@ -39,14 +40,48 @@ const createStockReportObject = function (data) {
   };
 };
 
+// Converting company data received from API into more usable format
+const createStockCompanyObject = function (data) {
+  console.log(data);
+  // desctructuring "data" object received in loadStock function
+  let {
+    // name,
+    ticker,
+    address,
+    branding: logo,
+    total_employees: employees,
+    market_cap,
+    description,
+  } = data;
+
+  return {
+    // name: name,
+    ticker: ticker,
+    address: address,
+    logo: logo,
+    employees: employees,
+    market_cap: market_cap,
+    description: description,
+  };
+};
+
 // Load stock that is requested through search field
 const loadStock = async function (ticker) {
   try {
     // Calls API with a requested ticker
-    const data = await getJSON(`${API_URL}${API_KEY}&ticker=${ticker}`);
+    const fin_data = await getJSON(`${API_URL_2}${API_KEY}&ticker=${ticker}`);
     // Converts data using another function
-    stock = createStockReportObject(data.results[1]);
+    stock = createStockReportObject(fin_data.results[1]);
+
+    // Calls API with a requested ticker
+    const comp_data = await getJSON(`${API_URL_3}${ticker}?apiKey=${API_KEY}`);
+    // Converts data using another function
+    company = createStockCompanyObject(comp_data.results);
+
+    // Testing logs
     console.log(stock);
+    console.log(company);
+
     // Populates screener
     fillScreen();
   } catch (err) {
@@ -86,6 +121,20 @@ const fillScreen = function () {
   const equityAndLiab = formatAmount(
     stock.financials.balance_sheet.liabilities_and_equity.value
   );
+  const capitalization = formatAmount(Math.trunc(company.market_cap));
+  const employed = formatAmount(company.employees);
+
+  // Formats other strings as necessary
+  const about = company.description.slice(0, 300);
+  const street = company.address.address1.toLowerCase();
+  const city =
+    company.address.city.slice(0, 1) +
+    company.address.city.substring(1).toLowerCase();
+
+  // Saves company logo into local storage
+  localStorage.setItem("logo_img", company.logo.icon_url);
+  const logo = localStorage.getItem("logo_img");
+
   // Empties old data if there's any
   screener.innerHTML = "";
 
@@ -93,8 +142,14 @@ const fillScreen = function () {
   const basic_info = `      
         <div class="wrapper">
         <div>
-          <h3>${stock.company_name} (${stock.tickers})</h3>
-          Report pro <b>${stock.quarter} ${stock.year}</b><br />
+          <h3>${stock.company_name} (${company.ticker})</h3>
+          <img src="${logo}" alt="${company.ticker} logo" />
+          <p><span class="item">Adresa:</span> ${street}, ${city}, ${company.address.postal_code}, ${company.address.state}
+          <br /><span class="item">Počet zaměstnanců:</span> ${employed}
+          <br /><span class="item">Tržní kapitalizace:</span> $ ${capitalization}
+          <p />
+          <p><span class="item">Popis:</span> ${about}...</p>
+          <span class="item">Výňatek z finanční zprávy za ${stock.quarter} ${stock.year}:</span><br />
           (Období od ${stock.start} do ${stock.end})
         </div>
         <table>
@@ -159,7 +214,11 @@ searchField.addEventListener("keypress", function (e) {
 
 // -- TODO --
 // CODING
-// 1) Fix error handling, and display error in the screener properly formatted
-// 2) loading older reports as well
+// 1) Fix lower/uppercase in the street string
+// 2) Figure out saving and displaying of images from API
+// 3) Fix error handling, and display error in the screener properly formatted
+// 4) loading older reports as well
+// 5) Refactoring
+
 // CONTENT
 // 1) Load more financial data (almost all of them)

@@ -317,6 +317,11 @@ table h4 {
   color: white;
 }
 
+.item {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
 #screener {
   background: #fff;
   min-height: 400px;
