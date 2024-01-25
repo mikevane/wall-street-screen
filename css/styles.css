@@ -333,6 +333,26 @@ table h4 {
   margin-bottom: 14px;
 }
 
+.change {
+  font-family: "Poppins", sans-serif;
+  font-weight: bold;
+  vertical-align: baseline;
+  display: inline-block;
+  height: 20px;
+  width: 68px;
+  color: #fff;
+  border: 1px solid #918686;
+  border-radius: 6px;
+}
+
+.gain {
+  background-color: rgb(83, 165, 83);
+}
+
+.loss {
+  background-color: rgb(233, 94, 94);
+}
+
 .btn {
   border: 1px solid #668eb9;
   border-radius: 6px;
@@ -372,7 +392,7 @@ table h4 {
   min-height: 400px;
   padding: 10px;
   font-family: "Arial", sans-serif;
-  line-height: 1.2;
+  line-height: 1.4;
 }
 
 /* Specfic styles for mobile devices / screen width 600px and under */

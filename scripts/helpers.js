@@ -24,8 +24,28 @@ const timeout = function (s) {
   });
 };
 
-// Formats string mounts from '12345567' to '1 234 567'
+// Formats string amounts: '12345567' -> '1 234 567'
 export const formatAmount = function (num) {
   const parted = num.toString().replace(/(\d)(?=(\d{3})+$)/g, "$1 ");
   return parted;
+};
+
+// Formats capitalized text into 1st letter caps: "AND IT WAS" -> "And It Was"
+export const formatCaps = function (address) {
+  let caps = address.toLowerCase().split(" ");
+
+  for (let i = 0; i < caps.length; i++) {
+    caps[i] = caps[i][0].toUpperCase() + caps[i].substring(1);
+  }
+  caps = caps.join().replaceAll(",", " ");
+
+  return caps;
+};
+
+// Applies formatAmount() to a whole object through looping
+export const loopAndFormat = function (object) {
+  for (const item of Object.values(object)) {
+    item.value = formatAmount(item.value);
+  }
+  return object;
 };
