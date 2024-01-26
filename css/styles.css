@@ -361,6 +361,11 @@ table h4 {
   font-weight: bold;
 }
 
+.error__message {
+  color: rgb(233, 94, 94);
+  font-weight: bold;
+}
+
 .btn {
   border: 1px solid #668eb9;
   border-radius: 6px;

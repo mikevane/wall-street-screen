@@ -97,7 +97,23 @@ const loadStock = async function (ticker) {
     // Populates screener
     fillScreen();
   } catch (err) {
-    console.error(`${err} - xxxx.`);
+    if (err.message === "Cannot read properties of undefined (reading '0')") {
+      console.log(
+        `Error: ${ticker} nebyl rozpoznán. Zkuste prosím jiný ticker.</span>`
+      );
+      screener.innerHTML = "";
+      screener.insertAdjacentHTML(
+        "afterbegin",
+        `<span class="error__message">Error: ${ticker} nebyl rozpoznán. Zkuste prosím jiný ticker.</span>`
+      );
+    } else {
+      console.error(`${err}`);
+      screener.innerHTML = "";
+      screener.insertAdjacentHTML(
+        "afterbegin",
+        `<span class="error__message">${err}</span>`
+      );
+    }
   }
 };
 
@@ -339,7 +355,6 @@ searchField.addEventListener("keypress", function (e) {
 
 // -- TODO --
 // CODING
-// 5) Fix error handling, and display error in the screener properly formatted
 // 4) Slider for statements
 // 3) Replacing hamburger menu
 // WEBDESIGN

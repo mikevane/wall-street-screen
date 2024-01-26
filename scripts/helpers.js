@@ -7,16 +7,19 @@ export const getJSON = async function (url) {
     const res = await Promise.race([fetch(url), timeout(TIMEOUT)]);
     const data = await res.json();
 
-    if (!res.ok) throw new Error(res.status);
+    if (!res.ok && res.status === 429)
+      throw new Error(
+        `<span class="error__message">Kód ${res.status}: Příliš mnoho pokusů o připojení k API.<br />Zkuste prosím znovu za 1 minutu.<br /> (Limit je 5 připojení za minutu.)</span>`
+      );
+    if (!res.ok && res.status === 500)
+      throw new Error(
+        `<span class="error__message">Kód ${res.status}: Interní chyba API serveru.</span>`
+      );
+    if (!res.ok && res.status !== (429 || 500))
+      throw new Error(`<span class="error__message">Kód ${res.status}</span>`);
     return data;
   } catch (err) {
-    if (err === 429) {
-      console.error(
-        `${err} - "Příliš mnoho pokusů o připojení. Zkuste prosím znovu za 1 minutu."`
-      );
-    } else {
-      console.error("- Neznámá chyba. Zkuste prosím jiný ticker");
-    }
+    throw err;
   }
 };
 
