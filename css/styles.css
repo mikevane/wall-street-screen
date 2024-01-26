@@ -173,8 +173,8 @@ form {
 }
 
 table {
-  max-width: 100%;
-  min-width: 33%;
+  max-width: 530px;
+  min-width: 530px;
   text-align: left;
   background-color: #b3c7dc;
   /* float: left; */
@@ -351,6 +351,14 @@ table h4 {
 
 .loss {
   background-color: rgb(233, 94, 94);
+}
+
+.number {
+  text-align: right;
+}
+
+.major {
+  font-weight: bold;
 }
 
 .btn {

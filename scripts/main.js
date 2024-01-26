@@ -97,10 +97,7 @@ const loadStock = async function (ticker) {
     // Populates screener
     fillScreen();
   } catch (err) {
-    console.error(
-      `${err} - Příliš mnoho pokusů o připojení. Prosím, zkuste znovu za 1 minutu.`
-    );
-    // throw err;
+    console.error(`${err} - xxxx.`);
   }
 };
 
@@ -170,81 +167,101 @@ const fillScreen = function () {
           <th colspan="4"><h4>Rozvaha<h4></h4></th>
           <tr>
             <td>Aktiva celkem:</td>
-            <td>${stock.financials.balance_sheet.assets.value}</td>
+            <td class="number">${
+              stock.financials.balance_sheet.assets.value
+            }</td>
             <td>Závazky celkem:</td>
-            <td>${stock.financials.balance_sheet.liabilities.value}</td>
+            <td class="number">${
+              stock.financials.balance_sheet.liabilities.value
+            }</td>
           </tr>
           <tr>
               <td>Oběžná aktiva</td>
-              <td>${stock.financials.balance_sheet.current_assets.value}</td>
+              <td class="number">${
+                stock.financials.balance_sheet.current_assets.value
+              }</td>
               <td>Krátkodobé závazky:</td>
-              <td>${
+              <td class="number">${
                 stock.financials.balance_sheet.current_liabilities.value
               }</td>
             </tr>
             <tr>
               <td>Dlouhodobý majetek:</td>
-              <td>${stock.financials.balance_sheet.noncurrent_assets.value}</td>
+              <td class="number">${
+                stock.financials.balance_sheet.noncurrent_assets.value
+              }</td>
               <td>Dlouhodobé závazky:</td>
-              <td>${
+              <td class="number">${
                 stock.financials.balance_sheet.noncurrent_liabilities.value
               }</td>
             </tr>
             <tr>
               <td colspan="2">Celkový kapitál:</td>
-              <td colspan="2">${
+              <td colspan="2" class="number">${
                 stock.financials.balance_sheet.equity.value
               }</td>
             </tr>
             <tr>
               <td colspan="2">Celkový kapitál + závazky</td>
-              <td colspan="2">${
+              <td colspan="2" class="number major">${
                 stock.financials.balance_sheet.liabilities_and_equity.value
               }</td>
             </tr>
         </table>
 
         <table>
-          <th colspan="4"><h4>Cash-flow výkaz<h4></h4></th>
+          <th colspan="2"><h4>Cash-flow výkaz<h4></h4></th>
           <tr>
-            <td>Aktiva celkem:</td>
-            <td></td>
-            <td>Závazky celkem:</td>
-            <td></td>
+            <td>Čisté cash-flow z finančních činností:</td>
+            <td class="number">${
+              stock.financials.cash_flow_statement
+                .net_cash_flow_from_financing_activities !== undefined
+                ? stock.financials.cash_flow_statement
+                    .net_cash_flow_from_financing_activities.value
+                : "N/A"
+            }</td>
           </tr>
           <tr>
-              <td>Oběžná aktiva</td>
-              <td></td>
-              <td>Krátkodobé závazky:</td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>Dlouhodobý majetek:</td>
-              <td></td>
-              <td>Dlouhodobé závazky:</td>
-              <td></td>
-            </tr>
-            <tr>
-              <td colspan="2">Celkový kapitál:</td>
-              <td colspan="2"></td>
-            </tr>
-            <tr>
-              <td colspan="2">Celkový kapitál + závazky</td>
-              <td colspan="2"></td>
-            </tr>
+            <td>Čisté cash-flow z investičních činností:</td>
+            <td class="number">${
+              stock.financials.cash_flow_statement
+                .net_cash_flow_from_investing_activities !== undefined
+                ? stock.financials.cash_flow_statement
+                    .net_cash_flow_from_investing_activities.value
+                : "N/A"
+            }</td>
+          </tr>
+          <tr>
+            <td>Čisté cash-flow z provozní činnosti:</td>
+            <td class="number">${
+              stock.financials.cash_flow_statement
+                .net_cash_flow_from_operating_activities !== undefined
+                ? stock.financials.cash_flow_statement
+                    .net_cash_flow_from_operating_activities.value
+                : "N/A"
+            }</td>
+          </tr>
+          <tr>
+            <td>Čisté cash-flow celkem:</td>
+            <td class="number major">${
+              stock.financials.cash_flow_statement.net_cash_flow !== undefined
+                ? stock.financials.cash_flow_statement.net_cash_flow.value
+                : "N/A"
+            }</td>
+          </tr>
         </table>
 
         <table>
           <th colspan="4"><h4>Výkaz zisků a ztrát<h4></h4></th>
           <tr>
             <td>Příjmy:</td>
-            <td>${
+            <td class="number">${
               stock.financials.income_statement.revenues !== undefined
                 ? stock.financials.income_statement.revenues.value
                 : "N/A"
             }</td>
             <td>Náklady na výnosy:</td>
-            <td>${
+            <td class="number">${
               stock.financials.income_statement.cost_of_revenue !== undefined
                 ? stock.financials.income_statement.cost_of_revenue.value
                 : "N/A"
@@ -252,7 +269,7 @@ const fillScreen = function () {
           </tr>
           <tr>
             <td colspan="2">Hrubý zisk:</td>
-            <td colspan="2">${
+            <td colspan="2" class="number">${
               stock.financials.income_statement.gross_profit !== undefined
                 ? stock.financials.income_statement.gross_profit.value
                 : "N/A"
@@ -260,7 +277,7 @@ const fillScreen = function () {
           </tr>
           <tr>
             <td colspan="2">Čistý zisk/ztráta:</td>
-            <td colspan="2">${
+            <td colspan="2" class="number">${
               stock.financials.income_statement
                 .net_income_loss_attributable_to_parent !== undefined
                 ? stock.financials.income_statement
@@ -270,11 +287,13 @@ const fillScreen = function () {
           </tr>
           <tr>
             <td colspan="2">Vážený průměr počtu akcií v oběhu:</td>
-            <td colspan="2">${shares !== undefined ? shares : "N/A"}</td>
+            <td colspan="2" class="number">${
+              shares !== undefined ? shares : "N/A"
+            }</td>
           </tr>
           <tr>
             <td colspan="2">Čistý zisk/ztráta na akcii:</td>
-            <td colspan="2">${
+            <td colspan="2" class="number major">${
               stock.financials.income_statement.diluted_earnings_per_share !==
               undefined
                 ? stock.financials.income_statement.diluted_earnings_per_share.value.replaceAll(
@@ -320,14 +339,9 @@ searchField.addEventListener("keypress", function (e) {
 
 // -- TODO --
 // CODING
-
-// 6) Fix error handling, and display error in the screener properly formatted
-// 5) Slider for statements
-// 4) Replacing hamburger menu
-
-// CONTENT
-// 3) Load more financial data (almost all of them)
-
+// 5) Fix error handling, and display error in the screener properly formatted
+// 4) Slider for statements
+// 3) Replacing hamburger menu
 // WEBDESIGN
 // 2) Gorgeous web-design
 // 1) Responsive design using DOM manipulation

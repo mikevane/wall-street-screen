@@ -7,12 +7,16 @@ export const getJSON = async function (url) {
     const res = await Promise.race([fetch(url), timeout(TIMEOUT)]);
     const data = await res.json();
 
-    if (!res.ok) throw new Error(`${data.message} (${res.status})`);
+    if (!res.ok) throw new Error(res.status);
     return data;
   } catch (err) {
-    console.error(
-      err`Příliš mnoho pokusů o připojení. Prosím, zkuste znovu za + minutu.`
-    );
+    if (err === 429) {
+      console.error(
+        `${err} - "Příliš mnoho pokusů o připojení. Zkuste prosím znovu za 1 minutu."`
+      );
+    } else {
+      console.error("- Neznámá chyba. Zkuste prosím jiný ticker");
+    }
   }
 };
 
