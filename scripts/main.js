@@ -7,8 +7,8 @@ let screener = document.getElementById("screener");
 const main = document.querySelector(".main");
 const searchField = document.querySelector(".search__field");
 const searchButton = document.querySelector(".search__btn");
-const btnLeft = document.querySelector(".btn__left");
-const btnRight = document.querySelector(".btn__right");
+// const btnLeft = document.querySelector(".btn__left");
+// const btnRight = document.querySelector(".btn__right");
 
 let stock = {};
 let company = {};
@@ -332,7 +332,10 @@ const fillScreen = function () {
           </table>
          </div>
 
-        </div>        
+        </div>    
+        
+        <button class="slider__btn btn__left">&laquo;</button>
+        <button class="slider__btn btn__right">&raquo;</button>
       </div>
     `;
 
@@ -341,6 +344,9 @@ const fillScreen = function () {
 
   // -- SLIDER --
   const slides = document.querySelectorAll(".slide");
+  const btnLeft = document.querySelector(".btn__left");
+  const btnRight = document.querySelector(".btn__right");
+
   let curSlide = 0;
   const maxSlide = slides.length;
 
