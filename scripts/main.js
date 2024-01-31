@@ -4,8 +4,11 @@ import "core-js/stable";
 import { async } from "regenerator-runtime";
 
 let screener = document.getElementById("screener");
+const main = document.querySelector(".main");
 const searchField = document.querySelector(".search__field");
 const searchButton = document.querySelector(".search__btn");
+const btnLeft = document.querySelector(".btn__left");
+const btnRight = document.querySelector(".btn__right");
 
 let stock = {};
 let company = {};
@@ -179,154 +182,209 @@ const fillScreen = function () {
           (${stock.start} - ${stock.end})
         </div>
 
-        <table>
-          <th colspan="4"><h4>Rozvaha<h4></h4></th>
-          <tr>
-            <td>Aktiva celkem:</td>
-            <td class="number">${
-              stock.financials.balance_sheet.assets.value
-            }</td>
-            <td>Závazky celkem:</td>
-            <td class="number">${
-              stock.financials.balance_sheet.liabilities.value
-            }</td>
-          </tr>
-          <tr>
-              <td>Oběžná aktiva</td>
+        <div class="slider">
+         <div class="slide slide--1">
+          <table>
+            <th colspan="4"><h4>Rozvaha<h4></h4></th>
+            <tr>
+              <td>Aktiva celkem:</td>
               <td class="number">${
-                stock.financials.balance_sheet.current_assets.value
+                stock.financials.balance_sheet.assets.value
               }</td>
-              <td>Krátkodobé závazky:</td>
+              <td>Závazky celkem:</td>
               <td class="number">${
-                stock.financials.balance_sheet.current_liabilities.value
+                stock.financials.balance_sheet.liabilities.value
               }</td>
             </tr>
             <tr>
-              <td>Dlouhodobý majetek:</td>
+                <td>Oběžná aktiva</td>
+                <td class="number">${
+                  stock.financials.balance_sheet.current_assets.value
+                }</td>
+                <td>Krátkodobé závazky:</td>
+                <td class="number">${
+                  stock.financials.balance_sheet.current_liabilities.value
+                }</td>
+              </tr>
+              <tr>
+                <td>Dlouhodobý majetek:</td>
+                <td class="number">${
+                  stock.financials.balance_sheet.noncurrent_assets.value
+                }</td>
+                <td>Dlouhodobé závazky:</td>
+                <td class="number">${
+                  stock.financials.balance_sheet.noncurrent_liabilities.value
+                }</td>
+              </tr>
+              <tr>
+                <td colspan="2">Celkový kapitál:</td>
+                <td colspan="2" class="number">${
+                  stock.financials.balance_sheet.equity.value
+                }</td>
+              </tr>
+              <tr>
+                <td colspan="2">Celkový kapitál + závazky</td>
+                <td colspan="2" class="number major">${
+                  stock.financials.balance_sheet.liabilities_and_equity.value
+                }</td>
+              </tr>
+          </table>
+         </div>
+
+         <div class="slide slide--2">
+          <table>
+            <th colspan="2"><h4>Cash-flow výkaz<h4></h4></th>
+            <tr>
+              <td>Čisté cash-flow z finančních činností:</td>
               <td class="number">${
-                stock.financials.balance_sheet.noncurrent_assets.value
-              }</td>
-              <td>Dlouhodobé závazky:</td>
-              <td class="number">${
-                stock.financials.balance_sheet.noncurrent_liabilities.value
+                stock.financials.cash_flow_statement
+                  .net_cash_flow_from_financing_activities !== undefined
+                  ? stock.financials.cash_flow_statement
+                      .net_cash_flow_from_financing_activities.value
+                  : "N/A"
               }</td>
             </tr>
             <tr>
-              <td colspan="2">Celkový kapitál:</td>
+              <td>Čisté cash-flow z investičních činností:</td>
+              <td class="number">${
+                stock.financials.cash_flow_statement
+                  .net_cash_flow_from_investing_activities !== undefined
+                  ? stock.financials.cash_flow_statement
+                      .net_cash_flow_from_investing_activities.value
+                  : "N/A"
+              }</td>
+            </tr>
+            <tr>
+              <td>Čisté cash-flow z provozní činnosti:</td>
+              <td class="number">${
+                stock.financials.cash_flow_statement
+                  .net_cash_flow_from_operating_activities !== undefined
+                  ? stock.financials.cash_flow_statement
+                      .net_cash_flow_from_operating_activities.value
+                  : "N/A"
+              }</td>
+            </tr>
+            <tr>
+              <td>Čisté cash-flow celkem:</td>
+              <td class="number major">${
+                stock.financials.cash_flow_statement.net_cash_flow !== undefined
+                  ? stock.financials.cash_flow_statement.net_cash_flow.value
+                  : "N/A"
+              }</td>
+            </tr>
+          </table>
+         </div>
+
+         <div class="slide slide--3">
+          <table>
+            <th colspan="4"><h4>Výkaz zisků a ztrát<h4></h4></th>
+            <tr>
+              <td>Příjmy:</td>
+              <td class="number">${
+                stock.financials.income_statement.revenues !== undefined
+                  ? stock.financials.income_statement.revenues.value
+                  : "N/A"
+              }</td>
+              <td>Náklady na výnosy:</td>
+              <td class="number">${
+                stock.financials.income_statement.cost_of_revenue !== undefined
+                  ? stock.financials.income_statement.cost_of_revenue.value
+                  : "N/A"
+              }</td>
+            </tr>
+            <tr>
+              <td colspan="2">Hrubý zisk:</td>
               <td colspan="2" class="number">${
-                stock.financials.balance_sheet.equity.value
+                stock.financials.income_statement.gross_profit !== undefined
+                  ? stock.financials.income_statement.gross_profit.value
+                  : "N/A"
               }</td>
             </tr>
             <tr>
-              <td colspan="2">Celkový kapitál + závazky</td>
-              <td colspan="2" class="number major">${
-                stock.financials.balance_sheet.liabilities_and_equity.value
+              <td colspan="2">Čistý zisk/ztráta:</td>
+              <td colspan="2" class="number">${
+                stock.financials.income_statement
+                  .net_income_loss_attributable_to_parent !== undefined
+                  ? stock.financials.income_statement
+                      .net_income_loss_attributable_to_parent.value
+                  : "N/A"
               }</td>
             </tr>
-        </table>
+            <tr>
+              <td colspan="2">Vážený průměr počtu akcií v oběhu:</td>
+              <td colspan="2" class="number">${
+                shares !== undefined ? shares : "N/A"
+              }</td>
+            </tr>
+            <tr>
+              <td colspan="2">Čistý zisk/ztráta na akcii:</td>
+              <td colspan="2" class="number major">${
+                stock.financials.income_statement.diluted_earnings_per_share !==
+                undefined
+                  ? stock.financials.income_statement.diluted_earnings_per_share.value.replaceAll(
+                      ".",
+                      ","
+                    )
+                  : "N/A"
+              }</td>
+            </tr>
+  
+          </table>
+         </div>
 
-        <table>
-          <th colspan="2"><h4>Cash-flow výkaz<h4></h4></th>
-          <tr>
-            <td>Čisté cash-flow z finančních činností:</td>
-            <td class="number">${
-              stock.financials.cash_flow_statement
-                .net_cash_flow_from_financing_activities !== undefined
-                ? stock.financials.cash_flow_statement
-                    .net_cash_flow_from_financing_activities.value
-                : "N/A"
-            }</td>
-          </tr>
-          <tr>
-            <td>Čisté cash-flow z investičních činností:</td>
-            <td class="number">${
-              stock.financials.cash_flow_statement
-                .net_cash_flow_from_investing_activities !== undefined
-                ? stock.financials.cash_flow_statement
-                    .net_cash_flow_from_investing_activities.value
-                : "N/A"
-            }</td>
-          </tr>
-          <tr>
-            <td>Čisté cash-flow z provozní činnosti:</td>
-            <td class="number">${
-              stock.financials.cash_flow_statement
-                .net_cash_flow_from_operating_activities !== undefined
-                ? stock.financials.cash_flow_statement
-                    .net_cash_flow_from_operating_activities.value
-                : "N/A"
-            }</td>
-          </tr>
-          <tr>
-            <td>Čisté cash-flow celkem:</td>
-            <td class="number major">${
-              stock.financials.cash_flow_statement.net_cash_flow !== undefined
-                ? stock.financials.cash_flow_statement.net_cash_flow.value
-                : "N/A"
-            }</td>
-          </tr>
-        </table>
-
-        <table>
-          <th colspan="4"><h4>Výkaz zisků a ztrát<h4></h4></th>
-          <tr>
-            <td>Příjmy:</td>
-            <td class="number">${
-              stock.financials.income_statement.revenues !== undefined
-                ? stock.financials.income_statement.revenues.value
-                : "N/A"
-            }</td>
-            <td>Náklady na výnosy:</td>
-            <td class="number">${
-              stock.financials.income_statement.cost_of_revenue !== undefined
-                ? stock.financials.income_statement.cost_of_revenue.value
-                : "N/A"
-            }</td>
-          </tr>
-          <tr>
-            <td colspan="2">Hrubý zisk:</td>
-            <td colspan="2" class="number">${
-              stock.financials.income_statement.gross_profit !== undefined
-                ? stock.financials.income_statement.gross_profit.value
-                : "N/A"
-            }</td>
-          </tr>
-          <tr>
-            <td colspan="2">Čistý zisk/ztráta:</td>
-            <td colspan="2" class="number">${
-              stock.financials.income_statement
-                .net_income_loss_attributable_to_parent !== undefined
-                ? stock.financials.income_statement
-                    .net_income_loss_attributable_to_parent.value
-                : "N/A"
-            }</td>
-          </tr>
-          <tr>
-            <td colspan="2">Vážený průměr počtu akcií v oběhu:</td>
-            <td colspan="2" class="number">${
-              shares !== undefined ? shares : "N/A"
-            }</td>
-          </tr>
-          <tr>
-            <td colspan="2">Čistý zisk/ztráta na akcii:</td>
-            <td colspan="2" class="number major">${
-              stock.financials.income_statement.diluted_earnings_per_share !==
-              undefined
-                ? stock.financials.income_statement.diluted_earnings_per_share.value.replaceAll(
-                    ".",
-                    ","
-                  )
-                : "N/A"
-            }</td>
-          </tr>
-
-        </table>
-
+        </div>        
       </div>
     `;
 
   // Inserts the HTML into screener div
   screener.insertAdjacentHTML("afterbegin", basic_info);
+
+  // -- SLIDER --
+  const slides = document.querySelectorAll(".slide");
+  let curSlide = 0;
+  const maxSlide = slides.length;
+
+  // moves slides; adept for moving to helpers
+  const goToSlide = function (slide) {
+    slides.forEach(
+      (s, i) => (s.style.transform = `translateX(${100 * (i - slide)}%)`)
+    );
+  };
+
+  // Function for right arrow button
+  const nextSlide = function () {
+    // If you are at the end of slides, move back to beginning
+    if (curSlide === maxSlide - 1) {
+      curSlide = 0;
+    } else {
+      // Move to next slide
+      curSlide++;
+    }
+    goToSlide(curSlide);
+    // activateDot(curSlide);
+  };
+  // Function for left arrow button
+  const prevSlide = function () {
+    // If you are at the beginning of slides, move to the end
+    if (curSlide === 0) {
+      curSlide = maxSlide - 1;
+    } else {
+      curSlide--;
+    }
+    goToSlide(curSlide);
+    // activateDot(curSlide);
+  };
+
+  // Makes sure we always start at 1st slide
+  goToSlide(0);
+
+  // Event handlers - listening for arrow keys and clicks
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "ArrowLeft") prevSlide();
+    if (e.key === "ArrowRight") nextSlide();
+  });
+  btnLeft.addEventListener("click", prevSlide);
+  btnRight.addEventListener("click", nextSlide);
 };
 
 // SEARCH FUNCIONALITY UPON CLICKING BUTTON
