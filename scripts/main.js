@@ -159,11 +159,11 @@ const fillScreen = function () {
   // Empties old data if there's any
   screener.innerHTML = "";
 
-  // Creates the HTML
+  // Dynamically generated HTML for insertion
   const basic_info = `
       <div class="wrapper">
 
-        <div>
+        <div class="info">
           <h3>${stock.company_name}</h3>
           <img 
            src="${
@@ -267,6 +267,9 @@ const fillScreen = function () {
               <td class="number major">${checkExistence(
                 stock.financials.cash_flow_statement.net_cash_flow
               )}</td>
+            </tr>
+            <tr class="expand">
+              <td colspan="4"></td>
             </tr>
           </table>
          </div>

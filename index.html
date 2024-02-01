@@ -7,11 +7,11 @@
     <meta name="author" content="Michal Vaněk" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script type="module" src="/scripts/main.js"></script>
-    <link
+    <!-- <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
-    <link rel="stylesheet" href="css/styles.css" />
+    /> -->
+    <link rel="stylesheet" href="css/styles-purplean.css" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -20,16 +20,16 @@
       rel="stylesheet"
     />
     <link
-      href="https://fonts.googleapis.com/css2?family=Gochi+Hand&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400&display=swap"
       rel="stylesheet"
     />
-    <title>Template</title>
+    <title>Wall Street Screen</title>
   </head>
 
   <body>
-    <div class="header">
+    <div id="header">
       <h1>Wall Street Screen</h1>
-      <p>Americké akcie přehledně</p>
+      <h2>Americké akcie přehledně</h2>
     </div>
 
     <!-- flex container for main content and sidebar -->
@@ -49,7 +49,7 @@
 
         <form class="search">
           <input type="text" class="search__field" placeholder="Ticker akcie" />
-          <button class="btn search__btn">
+          <button class="btn search__btn" data="Hledej">
             <span>Hledej</span>
           </button>
         </form>
@@ -60,14 +60,14 @@
       </div>
 
       <div class="sidebar">
-        <h3>Návod k použití</h3>
+        <h2>Návod k použití</h2>
         <p>
           Do vyhledávacího pole zadejte ticker firmy (například APPL pro Apple
           nebo F pro Ford) a stiskněte "Hledej".
         </p>
         <p>
           S použitím šipek po stranách tabulky můžete rotovat mezi rozvahou,
-          cash=flow výkazem a výkazem zisků a ztrát.
+          cash-flow výkazem a výkazem zisků a ztrát.
         </p>
         <p>K vytvoření tohoto webu byly použity následující technologie:</p>
         <ul>
@@ -79,7 +79,7 @@
     </div>
 
     <!-- flex container for footer content -->
-    <div class="footer">
+    <div id="footer">
       <div class="foot-left">2024 &copy; Michal Vaněk</div>
       <div class="foot-right">Poslední aktualizace: 1. 2. 2024</div>
     </div>

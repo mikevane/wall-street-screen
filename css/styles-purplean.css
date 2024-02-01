@@ -131,21 +131,14 @@ table {
 }
 
 body {
-  background-color: #222;
-  font-family: "Poppins", sans-serif;
+  background-color: #fff;
+  font-family: Arial, sans-serif;
   font-size: 14px;
-  font-weight: 300;
+  font-weight: 100;
 }
 
-h1 {
-  font-family: "Gochi Hand", cursive;
-  font-size: 54px;
-  color: #fff;
-  background-size: 100%;
-}
-h2 {
-  font-size: 220%;
-}
+h1,
+h2,
 h3,
 h4,
 h5,
@@ -171,22 +164,26 @@ table {
   max-width: 560px;
   min-width: 560px;
   text-align: left;
-  background-color: #b3c7dc;
+  background-color: #C5CED9;
   margin-top: 15px;
   border: 1px solid #fff;
-  border-radius: 15px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #6679CA;
 }
 
 table th {
   text-align: center;
   color: #fff;
-  background-color: #5c90c7;
+  background-color: #6679CA;
+  background-image: linear-gradient(to bottom right, #D39FE5, #6679CA);
   border: 1px solid #fff;
-  border-radius: 15px 15px 0 0;
+  border-radius: 10px 10px 0 0;
 }
 
 table tr:hover {
-  background-color: #5c90c7;
+  background-color: #B1E59F;
 }
 
 table td {
@@ -199,15 +196,36 @@ table h4 {
   padding: 0;
 }
 
-.header {
+.expand {
+ height: 30px;
+}
+
+#header {
   padding: 15px;
   text-align: center;
   background-color: #D39FE5;
-  background-image: linear-gradient(to right bottom, #D39FE5, #6679CA);
+  background-image: linear-gradient(to top left, #D39FE5, #6679CA);
   color: white;
   font-size: 22px;
   line-height: 2;
 }
+
+#header h1 {
+    font-family: 'Inter', sans-serif;
+    font-size: 54px;
+    font-weight: 100;
+    color: #fff;
+    background-size: 100%;
+    margin-bottom: 0px;
+  }
+  
+  #header h2 {
+    font-family: 'Inter', sans-serif;
+    font-size: 26px;
+    font-weight: 400;
+    color: #B1E59F;
+    text-shadow: 1px 1px 2px #546096;
+  }
 
 .flex {
   display: flex;
@@ -229,9 +247,11 @@ table h4 {
 
 .main {
   background-color: #fff;
-  flex: 70%;
-  padding: 20px;
-  color: #444;
+  flex: 68%;
+  padding: 20px 20px 0px 20px ;
+  margin: 20px 10px;
+  color: #555;
+  border-radius: 10px;
 }
 
 .main a {
@@ -239,11 +259,24 @@ table h4 {
 }
 
 .sidebar {
-  background-color: #b3c7dc;
-  flex: 30%;
+  font-family: 'Inter', sans-serif;
+  background-color: #D39FE5;
+  background-image: linear-gradient(to top, #D39FE5, #8696e0);
+  flex: 28%;
   padding: 20px;
-  color: #444;
+  color: #fff;
+  font-weight: 300;
+  font-size: 14px;
+  margin: 20px 10px;
+  border-radius: 10px;
 }
+
+.sidebar h2 {
+    font-size: 26px;
+    font-weight: 400;
+    color: #fff;
+    text-shadow: 1px 1px 2px #546096;
+  }
 
 .sidebar a {
   font-weight: bold;
@@ -256,17 +289,18 @@ table h4 {
 }
 
 .wrapper h3 {
-  color: #668eb9;
+  color: #6679CA;
   font-weight: bold;
+  text-shadow: 1px 1px #ffffff;
 }
 
-.footer {
-  background-color: #668eb9;
+#footer {
+  background-color: #D39FE5;
+  background-image: linear-gradient(to right bottom, #D39FE5, #6679CA);
+  color: white;
   display: flex;
   flex-wrap: wrap;
-  font-size: 0.7em;
-  color: #fff;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 400;
 }
 
@@ -282,8 +316,8 @@ table h4 {
 }
 
 .item {
-  font-weight: bold;
-  color: #668eb9;
+  /* font-weight: bold; */
+  color: #6679CA;
 }
 
 .branding {
@@ -292,23 +326,22 @@ table h4 {
 }
 
 .change {
-  font-family: "Poppins", sans-serif;
-  font-weight: bold;
+  font-family: "Inter", sans-serif;
+  font-weight: 300;
   vertical-align: baseline;
   display: inline-block;
   height: 20px;
   width: 68px;
   color: #fff;
-  border: 1px solid #918686;
-  border-radius: 6px;
+  border-radius: 5px;
 }
 
 .gain {
-  background-color: rgb(83, 165, 83);
+  background-color: #6ab452;
 }
 
 .loss {
-  background-color: rgb(233, 94, 94);
+  background-color: #c7613f;
 }
 
 .number {
@@ -325,33 +358,40 @@ table h4 {
 }
 
 .btn {
-  border: 1px solid #668eb9;
-  border-radius: 6px;
-  background-color: #668eb9;
-  background-image: linear-gradient(to right bottom, #668eb9, #93bae3);
-  color: white;
-  padding: 2px 6px 2px 6px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 13px;
+  border: none;
+  outline: none;
+  position: relative;
+  border-radius: 4px;
+  background-color: #D39FE5;
+  background-image: linear-gradient(to right bottom, #D39FE5, #6679CA);
+  padding: 8px 12px;
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  font-weight: 200;
+  text-transform: uppercase;
   cursor: pointer;
+  opacity: 0.8;
 }
 
 .btn:hover {
-  background-color: #537daa;
-  background-image: linear-gradient(to right bottom, #315e8d, #668eb9);
+    background-color: #6679CA;
+    background-image: linear-gradient(to right bottom, #D39FE5, #6679CA);
+    opacity: 1;
 }
 
 .btn:active {
-  position: relative;
-  top: 1px;
-  left: 1px;
+    position: relative;
+    top: 1px;
+    left: 1px;
 }
 
 .search__field {
-  border: 1px solid #888;
-  border-radius: 6px;
+  border: 1px solid #D39FE5;
+  border-radius: 4px;
+  padding: 8px 12px;
+  position: relative;
+  bottom: 1px;
 }
 
 .search__field:focus {
@@ -383,13 +423,14 @@ table h4 {
   position: relative;
   z-index: 10;
   border: none;
-  background: #537daa;
-  opacity: 0.7;
+  background-color: #D39FE5;
+  background-image: linear-gradient(to right bottom, #D39FE5, #6679CA);
+  /* opacity: 0.8; */
   font-family: inherit;
   color: #fff;
   border-radius: 50%;
-  height: 35px;
-  width: 35px;
+  height: 30px;
+  width: 30px;
   font-size: 22px;
   font-weight: bold;
   cursor: pointer;
@@ -398,12 +439,12 @@ table h4 {
 .btn__left {
   position: relative;
   top: 105px;
-  right: 290px;
+  right: 310px;
 }
 
 .btn__right {
   position: relative;
-  left: 290px;
+  left: 310px;
   bottom: 160px;
 }
 
@@ -423,7 +464,7 @@ table h4 {
 
 .dot {
   border: none;
-  background-color: #537daa;
+  background-color: #6679CA;
   opacity: 0.6;
   height: 11px;
   width: 9px;
@@ -441,9 +482,15 @@ table h4 {
   opacity: 1;
 }
 
+.info {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  color: #555;
+}
+
 #screener {
   min-height: 400px;
-  padding: 10px;
+  padding: 10px 10px 0px 10px;
   font-family: Helvetica, Sans-Serif;
   line-height: 1.4;
 }
