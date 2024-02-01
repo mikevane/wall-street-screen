@@ -29,23 +29,7 @@
   <body>
     <div class="header">
       <h1>Wall Street Screen</h1>
-      <p>My first JavaScript project</p>
-    </div>
-
-    <div class="topnav">
-      <a href="index.html" class="home">Home</a>
-      <!-- Navigation links (hidden on large screen) -->
-      <div id="myLinks">
-        <a href="#news">News</a>
-        <a href="#contact">Contact</a>
-        <a href="#Specials">Specials</a>
-        <a href="#archive">Archive</a>
-        <a href="#about">About</a>
-      </div>
-      <!-- "Hamburger menu" to toggle the navigation links -->
-      <a href="javascript:void(0);" class="icon" onclick="myFunction()">
-        <i class="fa fa-bars"></i>
-      </a>
+      <p>Americké akcie přehledně</p>
     </div>
 
     <!-- flex container for main content and sidebar -->
@@ -55,12 +39,12 @@
           Vítejte,
           <br />poskytujeme základní finanční údaje o veřejně obchodovaných
           akciových firmách z amerických burz. K dispozici jsou údaje za
-          poslední zveřejněné čtvrtletí.
+          poslední zveřejněné čtvrtletí. Kurz je poslední zavírací cena.
         </p>
         <p>
           Veškeré údaje na tomto webu mají pouze informativní charakter.
           Originály finančních zpráv v kompletním rozsahu jsou obvykle ke
-          stažení v sekci Vztahy s investory na webových stránkách dané firmy.
+          stažení v sekci "Vztahy s investory" na webových stránkách dané firmy.
         </p>
 
         <form class="search">
@@ -73,9 +57,6 @@
         <div id="screener">
           <div class="slider"></div>
         </div>
-        <!-- <button class="slider__btn btn__left">&laquo;</button>
-        <button class="slider__btn btn__right">&raquo;</button> -->
-        <div class="dots"></div>
       </div>
 
       <div class="sidebar">
@@ -84,33 +65,23 @@
           Do vyhledávacího pole zadejte ticker firmy (například APPL pro Apple
           nebo F pro Ford) a stiskněte "Hledej".
         </p>
-        <p>A to je vše.</p>
-        <p>K vytvoření tohoto webu byly použity následující technologie</p>
+        <p>
+          S použitím šipek po stranách tabulky můžete rotovat mezi rozvahou,
+          cash=flow výkazem a výkazem zisků a ztrát.
+        </p>
+        <p>K vytvoření tohoto webu byly použity následující technologie:</p>
         <ul>
           <li>JavaScript</li>
           <li>HTML</li>
           <li>CSS</li>
         </ul>
-        <p>Lorem ipsum dolor sit amet.</p>
       </div>
     </div>
 
     <!-- flex container for footer content -->
     <div class="footer">
       <div class="foot-left">2024 &copy; Michal Vaněk</div>
-      <div class="foot-right">Poslední aktualizace: 31. 1. 2024</div>
+      <div class="foot-right">Poslední aktualizace: 1. 2. 2024</div>
     </div>
-
-    <!-- Toggle between showing and hiding the navigation menu links when the user clicks on the hamburger menu -->
-    <script>
-      function myFunction() {
-        var x = document.getElementById("myLinks");
-        if (x.style.display === "block") {
-          x.style.display = "none";
-        } else {
-          x.style.display = "block";
-        }
-      }
-    </script>
   </body>
 </html>

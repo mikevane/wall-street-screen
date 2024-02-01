@@ -1,3 +1,93 @@
+/* Reset for cross-browser consistency */
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
 /* HTML5 display-role reset for older browsers */
 article,
 aside,
@@ -42,7 +132,6 @@ table {
 
 body {
   background-color: #222;
-  /* font-family: Helvetica, Sans-Serif; */
   font-family: "Poppins", sans-serif;
   font-size: 14px;
   font-weight: 300;
@@ -52,7 +141,7 @@ h1 {
   font-family: "Gochi Hand", cursive;
   font-size: 54px;
   background-color: #fff;
-  background-image: linear-gradient(to right bottom, #eee, #a0764a);
+  background-image: linear-gradient(to right bottom, #ffffff, #8374a2);
   background-size: 100%;
   -webkit-background-clip: text;
   -moz-background-clip: text;
@@ -84,20 +173,21 @@ form {
 }
 
 table {
-  max-width: 530px;
-  min-width: 530px;
+  max-width: 560px;
+  min-width: 560px;
   text-align: left;
   background-color: #b3c7dc;
-  /* float: left; */
-  /* margin-left: auto;
-  margin-right: auto; */
   margin-top: 15px;
+  border: 1px solid #fff;
+  border-radius: 15px;
 }
 
 table th {
   text-align: center;
-  border: 1px solid #fff;
   color: #fff;
+  background-color: #5c90c7;
+  border: 1px solid #fff;
+  border-radius: 15px 15px 0 0;
 }
 
 table tr:hover {
@@ -115,7 +205,7 @@ table h4 {
 }
 
 .header {
-  padding: 30px;
+  padding: 15px;
   text-align: center;
   background: #668eb9;
   color: white;
@@ -142,7 +232,7 @@ table h4 {
 }
 
 .main {
-  background-color: #ffe2d2;
+  background-color: #fff;
   flex: 70%;
   padding: 20px;
   color: #444;
@@ -193,45 +283,6 @@ table h4 {
   flex: 50%;
   padding: 20px;
   text-align: right;
-}
-
-.topnav {
-  overflow: hidden;
-  /* background: #d0750e;    */
-  background: #b99166;
-  position: relative;
-}
-
-.topnav #myLinks {
-  float: left;
-  position: relative;
-}
-
-.topnav a {
-  float: left;
-  color: white;
-  padding: 14px 16px;
-  text-decoration: none;
-  font-size: 17px;
-}
-
-.topnav a.icon {
-  /* background: #d0750e; */
-  background: #b99166;
-  display: none;
-  right: 0;
-  top: 0;
-}
-
-.topnav a:hover {
-  background-color: #b3c7dc;
-  color: black;
-}
-
-.home {
-  /* background-color: #d0750e; */
-  background: #b99166;
-  color: white;
 }
 
 .item {
@@ -303,7 +354,7 @@ table h4 {
 }
 
 .search__field {
-  border: 1px solid #fff;
+  border: 1px solid #888;
   border-radius: 6px;
 }
 
@@ -313,55 +364,51 @@ table h4 {
 
 /* SLIDER */
 .slider {
-  max-width: 600px;
-  height: 260px;
+  max-width: 560px;
+  height: 230px;
   margin: 0 auto;
   position: relative;
-
-  /* IN THE END */
+  bottom: 25px;
   overflow: hidden;
 }
 
 .slide {
   position: absolute;
   top: 0;
-  width: 580px;
-  height: 260px;
-
+  float: left;
+  max-width: 560px;
   display: flex;
   align-items: center;
   justify-content: center;
-
-  /* THIS creates the animation! */
   transition: transform 1s;
 }
 
 .slider__btn {
   position: relative;
-  bottom: 20%;
   z-index: 10;
-
   border: none;
-  background: rgba(255, 255, 255, 0.7);
+  background: #537daa;
+  opacity: 0.7;
   font-family: inherit;
-  color: #333;
+  color: #fff;
   border-radius: 50%;
-  height: 25px;
-  width: 25px;
-  font-size: 16px;
+  height: 35px;
+  width: 35px;
+  font-size: 22px;
   font-weight: bold;
   cursor: pointer;
 }
 
 .btn__left {
-  /* float: left; */
-  /* left: 20px; */
-  /* transform: translate(-50%, -50%); */
+  position: relative;
+  top: 105px;
+  right: 290px;
 }
 
 .btn__right {
-  /* left: 620px; */
-  /* transform: translate(50%, -50%); */
+  position: relative;
+  left: 290px;
+  bottom: 160px;
 }
 
 .filler {
@@ -369,43 +416,39 @@ table h4 {
 }
 
 .dots {
-  position: absolute;
-  bottom: 5%;
-  left: 50%;
+  position: relative;
+  bottom: 45px;
+  left: 46%;
   transform: translateX(-50%);
   display: flex;
+  height: 20px;
+  width: 30px;
 }
 
-.dots__dot {
+.dot {
   border: none;
-  background-color: #b9b9b9;
-  opacity: 0.7;
-  height: 1rem;
-  width: 1rem;
+  background-color: #537daa;
+  opacity: 0.6;
+  height: 11px;
+  width: 9px;
   border-radius: 50%;
   margin-right: 1.75rem;
   cursor: pointer;
   transition: all 0.5s;
-
-  /* Only necessary when overlying images */
-  /* box-shadow: 0 0.6rem 1.5rem rgba(0, 0, 0, 0.7); */
 }
 
-.dots__dot:last-child {
+.dot:last-child {
   margin: 0;
 }
 
-.dots__dot--active {
-  /* background-color: #fff; */
-  background-color: #888;
+.dot--active {
   opacity: 1;
 }
 
 #screener {
-  /* background: #fff; */
   min-height: 400px;
   padding: 10px;
-  font-family: "Arial", sans-serif;
+  font-family: Helvetica, Sans-Serif;
   line-height: 1.4;
 }
 
@@ -417,23 +460,3 @@ table h4 {
   h1 {
     font-size: 200%;
   }
-
-  .topnav #myLinks {
-    display: none;
-    float: none;
-  }
-
-  .topnav a {
-    float: none;
-    display: block;
-  }
-
-  .topnav #myLinks a {
-    border-top: 1px solid #b3c7dc;
-  }
-
-  .topnav a.icon {
-    display: block;
-    position: absolute;
-  }
-}

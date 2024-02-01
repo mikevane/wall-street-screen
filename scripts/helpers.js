@@ -56,3 +56,9 @@ export const loopAndFormat = function (object) {
   }
   return object;
 };
+
+// Checks if the item exists and return it's value if it does
+export const checkExistence = function (item) {
+  item = item !== undefined ? item.value : "N/A";
+  return item;
+};
