@@ -337,7 +337,7 @@ const fillScreen = function () {
   let curSlide = 0;
   const maxSlide = slides.length;
 
-  // moves slides
+  // Moves slides
   const goToSlide = function (slide) {
     slides.forEach(
       (s, i) => (s.style.transform = `translateX(${100 * (i - slide)}%)`)
