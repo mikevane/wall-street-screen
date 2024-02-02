@@ -430,6 +430,7 @@ ul li {
 }
 
 .slider__btn {
+  padding: 0;
   border-radius: 15px;
   -moz-border-radius: 15px;
   -webkit-border-radius: 15px;
@@ -439,7 +440,6 @@ ul li {
   font-weight: bold;
   -webkit-appearance: none;
   -moz-appearance: none;
-  appearance: none;
   padding-bottom: 6px;
 }
 
