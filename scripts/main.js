@@ -188,7 +188,7 @@ const fillScreen = function () {
           (${stock.start} - ${stock.end})
         </div>
 
-        <button class="btn slider__btn btn__left">&laquo;</button>
+        <button class="btn slider__btn btn__left">&larr;</button>
 
         <div class="slider">
          <div class="slide slide--1">
@@ -320,7 +320,7 @@ const fillScreen = function () {
 
         </div> 
         
-        <button class="btn slider__btn btn__right">&raquo;</button>
+        <button class="btn slider__btn btn__right">&rarr;</button>
         <div class="dots"></div>
       </div>
     `;

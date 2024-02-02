@@ -440,6 +440,7 @@ ul li {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
+  padding-bottom: 6px;
 }
 
 .btn__left {
