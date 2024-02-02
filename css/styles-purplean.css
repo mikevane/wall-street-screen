@@ -431,6 +431,9 @@ ul li {
   width: 30px;
   font-size: 22px;
   font-weight: bold;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 }
 
 .btn__left {
@@ -515,16 +518,16 @@ ul li {
     font-size: 20px;
   }
   .slide {
-    max-width: 85vw;
-    min-width: 85vw;
+    max-width: 90vw;
+    min-width: 90vw;
   }
   .slider {
-    max-width: 85vw;
-    min-width: 85vw;
+    max-width: 90vw;
+    min-width: 90vw;
   }
   table.stock_data {
-    max-width: 85vw;
-    min-width: 85vw;
+    max-width: 90vw;
+    min-width: 90vw;
     table-layout: fixed;
   }
   .dots {
