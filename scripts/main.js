@@ -96,12 +96,12 @@ const loadStock = async function (ticker) {
     // Converts data
     company = createStockCompanyObject(comp_data.results);
 
-    // Testing logs
+    // // Testing logs
     // console.log(stock);
     // console.log(company);
     // console.log(price);
 
-    // Populates screener
+    // Populates "Screener"
     fillScreen();
 
     // Error handling
@@ -113,7 +113,7 @@ const loadStock = async function (ticker) {
       screener.innerHTML = "";
       screener.insertAdjacentHTML(
         "afterbegin",
-        `<span class="error__message">Error: ${ticker} nebyl rozpoznán. Zkuste prosím jiný ticker.</span>`
+        `<span class="error__message">Error: Ticker ${ticker} nebyl rozpoznán. Zkuste prosím jiný ticker.</span>`
       );
     } else {
       console.error(`${err}`);
@@ -151,10 +151,10 @@ const fillScreen = function () {
   const street = formatCaps(company.address.address1);
   const city = formatCaps(company.address.city);
 
-  // Calculates percentage change during previous day
-  const change = (((price.close - price.open) / price.open) * 100)
-    .toFixed(2)
-    .replaceAll(".", ",");
+  // Calculates % change during prev. day and formats to Czech
+  const change = (
+    Math.round(((price.close - price.open) / price.open) * 10000) / 100
+  ).toLocaleString("cs-Cz");
 
   // Empties old data if there's any
   screener.innerHTML = "";
@@ -172,10 +172,11 @@ const fillScreen = function () {
            alt="${company.ticker} logo" 
            title="${company.ticker} logo" 
            class="branding"/>
-          <p><span class="item">Kurz:</span> $${quote} <span class="item">Změna:</span> <span class="change
-            ${change > 0 ? "gain" : "loss"}
+          <p><span class="item">Kurz:</span> $${quote} <span class="item">Změna:</span> <span class="change ${
+    change.includes("-") ? "loss" : "gain"
+  }
           ">
-          ${change > 0 ? "+" + change : change} %</span>
+          ${change.includes("-") ? change : "+" + change} %</span>
           <br /><span class="item">Ticker:</span> ${company.ticker}
           <br /><span class="item">Adresa:</span> ${street},
           ${city}, ${company.address.postal_code}, ${company.address.state}
@@ -187,11 +188,11 @@ const fillScreen = function () {
           (${stock.start} - ${stock.end})
         </div>
 
-        <button class="slider__btn btn__left">&laquo;</button>
+        <button class="btn slider__btn btn__left">&laquo;</button>
 
         <div class="slider">
          <div class="slide slide--1">
-          <table>
+          <table class="stock_data">
             <th colspan="4"><h4>Rozvaha<h4></h4></th>
             <tr>
               <td>Aktiva celkem:</td>
@@ -231,7 +232,7 @@ const fillScreen = function () {
               </tr>
               <tr>
                 <td colspan="2">Celkový kapitál + závazky</td>
-                <td colspan="2" class="number major">${checkExistence(
+                <td colspan="2" class="number">${checkExistence(
                   stock.financials.balance_sheet.liabilities_and_equity
                 )}</td>
               </tr>
@@ -239,7 +240,7 @@ const fillScreen = function () {
          </div>
 
          <div class="slide slide--2">
-          <table>
+          <table class="stock_data">
             <th colspan="2"><h4>Cash-flow výkaz<h4></h4></th>
             <tr>
               <td>Čisté cash-flow z finančních činností:</td>
@@ -264,7 +265,7 @@ const fillScreen = function () {
             </tr>
             <tr>
               <td>Čisté cash-flow celkem:</td>
-              <td class="number major">${checkExistence(
+              <td class="number">${checkExistence(
                 stock.financials.cash_flow_statement.net_cash_flow
               )}</td>
             </tr>
@@ -275,7 +276,7 @@ const fillScreen = function () {
          </div>
 
          <div class="slide slide--3">
-          <table>
+          <table class="stock_data">
             <th colspan="4"><h4>Výkaz zisků a ztrát<h4></h4></th>
             <tr>
               <td>Příjmy:</td>
@@ -309,7 +310,7 @@ const fillScreen = function () {
 
             <tr>
               <td colspan="2">Čistý zisk/ztráta na akcii:</td>
-              <td colspan="2" class="number major">${checkExistence(
+              <td colspan="2" class="number">${checkExistence(
                 stock.financials.income_statement.diluted_earnings_per_share
               )}</td>
             </tr>
@@ -319,7 +320,7 @@ const fillScreen = function () {
 
         </div> 
         
-        <button class="slider__btn btn__right">&raquo;</button>
+        <button class="btn slider__btn btn__right">&raquo;</button>
         <div class="dots"></div>
       </div>
     `;
