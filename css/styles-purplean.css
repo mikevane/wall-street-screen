@@ -430,9 +430,9 @@ ul li {
 }
 
 .slider__btn {
-  border-radius: 50%;
-  -moz-border-radius: 50%;
-  -webkit-border-radius: 50%;
+  border-radius: 15px;
+  -moz-border-radius: 15px;
+  -webkit-border-radius: 15px;
   height: 30px;
   width: 30px;
   font-size: 22px;
