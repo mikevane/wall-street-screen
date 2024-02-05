@@ -303,12 +303,12 @@ ul li {
 }
 
 .foot-left {
-  flex: 50%;
+  flex: 45%;
   padding: 20px;
 }
 
 .foot-right {
-  flex: 50%;
+  flex: 55%;
   padding: 20px;
   text-align: right;
 }
@@ -426,6 +426,10 @@ ul li {
   align-items: center;
   justify-content: center;
   transition: transform 1s;
+}
+
+.buttons {
+  position: absolute;
 }
 
 .slider__btn {
