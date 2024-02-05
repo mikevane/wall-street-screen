@@ -410,7 +410,8 @@ ul li {
 /* SLIDER */
 .slider {
   max-width: 560px;
-  height: 230px;
+  min-height: 260px;
+  height: auto;
   margin: 0 auto;
   position: relative;
   bottom: 25px;
@@ -422,14 +423,13 @@ ul li {
   top: 0;
   float: left;
   max-width: 560px;
-  /* display: flex; */
   align-items: center;
   justify-content: center;
   transition: transform 1s;
 }
 
 .buttons {
-  position: absolute;
+  margin: 0 auto 0 auto;
 }
 
 .slider__btn {
@@ -441,6 +441,7 @@ ul li {
   width: 30px;
   font-size: 22px;
   font-weight: bold;
+  appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
   padding-bottom: 6px;
@@ -448,31 +449,31 @@ ul li {
 
 .btn__left {
   position: relative;
-  top: 105px;
-  right: 310px;
+  bottom: 190px;
+  right: 290px;
 }
 
 .btn__left:active {
   position: relative;
-  top: 106px;
-  right: 309px;
+  bottom: 189px;
+  right: 291px;
 }
 
 .btn__right {
   position: relative;
-  left: 310px;
-  bottom: 160px;
+  left: 290px;
+  bottom: 190px;
 }
 
 .btn__right:active {
   position: relative;
-  left: 311px;
-  bottom: 159px;
+  left: 291px;
+  bottom: 189px;
 }
 
 .dots {
   position: relative;
-  bottom: 45px;
+  bottom: 90px;
   display: flex;
   height: 20px;
   width: 92px;
@@ -520,28 +521,21 @@ ul li {
   .flex {
     flex-direction: column;
   }
-  /* #header {
-    background-attachment: initial;
-  } */
   #header h1 {
     font-size: 32px;
   }
   #header h2 {
     font-size: 20px;
   }
-  /* #footer {
-    background-attachment: initial;
-  } */
   .slider {
     max-width: 100%;
-    min-width: 100%;
+    min-width: 370px;
   }
   .slide {
     max-width: 100%;
     min-width: 100%;
   }
   table.stock_data {
-    /* table-layout: fixed; */
     max-width: 100%;
     min-width: 100%;
   }
@@ -558,24 +552,23 @@ ul li {
   }
   .btn__left {
     position: relative;
-    top: 260px;
-    right: 40px;
-    z-index: 1;
+    bottom: 30px;
+    right: 10px;
   }
   .btn__left:active {
     position: relative;
-    top: 261px;
-    right: 41px;
+    bottom: 29px;
+    right: 11px;
   }
   .btn__right {
     position: relative;
-    bottom: 20px;
-    left: 40px;
+    bottom: 30px;
+    left: 10px;
     z-index: 1;
   }
   .btn__right:active {
     position: relative;
-    bottom: 19px;
-    left: 41px;
+    bottom: 29px;
+    left: 11px;
   }
 }
