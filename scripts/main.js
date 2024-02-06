@@ -357,6 +357,7 @@ const fillScreen = function () {
     goToSlide(curSlide);
     activateDot(curSlide);
   };
+
   // Function for left arrow button
   const prevSlide = function () {
     // If you are at the beginning of slides, move to the end
